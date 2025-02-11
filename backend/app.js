@@ -1,18 +1,29 @@
-var createError = require('http-errors');
-var express = require('express');
-var logger = require('morgan');
+import createError from 'http-errors';
+import express from 'express';
+import logger from 'morgan';
+import { MongoClient } from 'mongodb';
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+import { matchesRouter } from './routes/matches.js';
 
-var app = express();
+const app = express();
+
+const url = 'mongodb://localhost:27017';
+const client = new MongoClient(url);
+var db;
+
+async function startDb() {
+  await client.connect();
+  db = client.db('tennis');
+  console.log('db connected');
+}
+
+await startDb().then();
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/matches', matchesRouter(db));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -30,4 +41,4 @@ app.use(function(err, req, res, next) {
   res.json({err});
 });
 
-module.exports = app;
+export default app;
