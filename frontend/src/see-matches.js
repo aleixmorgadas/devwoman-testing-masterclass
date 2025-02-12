@@ -25,7 +25,7 @@ async function loadMatch() {
     </div>
     <div class="match-score">
       <div><button id="scoring-player1">Score's player 1</button></div>
-      <div class="score" id="score">${match.score.result}</div>
+      <div class="score" id="score">${match?.score?.result || 'To start'}</div>
       <div><button id="scoring-player2">Score's player 2</button></div>
     </div>
   </div>
