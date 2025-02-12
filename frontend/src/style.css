@@ -26,6 +26,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -78,8 +79,44 @@ button:focus-visible {
   }
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+.matches {
+  display: flex;
+  flex-direction: column;
+  width: 900px;
+}
+
+.matches .row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  text-align: left;
+}
+
+.matches .row > div {
+  flex: 1 1 calc(33.333% - 20px);
+}
+
+.matches .header {
+  font-weight: bold;
+}
+
+.match-info {
+  display: flex;
+  width: 900px;
+}
+
+.match-info .player-info {
+  flex: 1 1 calc(33.333% - 20px);
+}
+
+.match-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 900px;
+  margin-top: 2em;
+}
+
+.match-score > div {
+  flex: 1 1 calc(33.333% - 20px);
 }
