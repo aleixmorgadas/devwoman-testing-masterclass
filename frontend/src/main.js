@@ -16,7 +16,7 @@ function fetchMatches() {
   });  
 }
 
-document.querySelector('#app').innerHTML = `
+document.getElementById('app').innerHTML = `
   <div>
     <div class="create-match">
       <label for="player1">Player1</label>
@@ -24,8 +24,6 @@ document.querySelector('#app').innerHTML = `
 
       <label for="player2">Player2</label>
       <input type="text" id="player2"/>
-
-      <button id="create-match-button">Create new match</button>
     </div>
     <div id="matches" class="matches">
       <div class="row header">
