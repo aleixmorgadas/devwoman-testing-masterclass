@@ -24,6 +24,8 @@ document.getElementById('app').innerHTML = `
 
       <label for="player2">Player2</label>
       <input type="text" id="player2"/>
+
+      <button id="create-match-button">Create new match</button>
     </div>
     <div id="matches" class="matches">
       <div class="row header">

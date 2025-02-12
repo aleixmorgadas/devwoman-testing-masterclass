@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 import { ObjectId } from 'mongodb';
-import { getScore } from './scores.js';
+import { calculateScore, getScore } from './scores.js';
 
 
 export const matchesRouter = (db) => {
@@ -28,21 +28,9 @@ export const matchesRouter = (db) => {
   });
 
   router.patch('/:matchId/scores/:player', async function(req, res) {
-    const match = await matchesCollection.findOne({_id: new ObjectId(req.params.matchId)});
+    var match = await matchesCollection.findOne({_id: new ObjectId(req.params.matchId)});
     const player = req.params.player;
-    if (match.score == null) {
-      match.score = {
-        player1: player == 'player1' ? 1 : 0,
-        player2: player == 'player2' ? 1 : 0
-      }
-    } else {
-      if (player == 'player1') {
-        match.score.player1 += 1;
-      } else {
-        match.score.player2 += 1;
-      }
-    }
-    match.score.result = getScore(match.score.player1, match.score.player2);
+    match = calculateScore(match, player);
     await matchesCollection.updateOne({_id: new ObjectId(req.params.matchId)}, { $set: match });
     res.json(match);
   });
