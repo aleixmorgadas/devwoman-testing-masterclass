@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 import { ObjectId } from 'mongodb';
+import { getScore } from './scores.js';
 
 
 export const matchesRouter = (db) => {
@@ -22,8 +23,28 @@ export const matchesRouter = (db) => {
   });
 
   router.get('/:matchId', async function(req, res, next) {
-    const matches = await matchesCollection.findOne({_id: new ObjectId(req.params.matchId)});
-    res.json(matches);
+    const match = await matchesCollection.findOne({_id: new ObjectId(req.params.matchId)});
+    res.json(match);
+  });
+
+  router.patch('/:matchId/scores/:player', async function(req, res) {
+    const match = await matchesCollection.findOne({_id: new ObjectId(req.params.matchId)});
+    const player = req.params.player;
+    if (match.score == null) {
+      match.score = {
+        player1: player == 'player1' ? 1 : 0,
+        player2: player == 'player2' ? 1 : 0
+      }
+    } else {
+      if (player == 'player1') {
+        match.score.player1 += 1;
+      } else {
+        match.score.player2 += 1;
+      }
+    }
+    match.score.result = getScore(match.score.player1, match.score.player2);
+    await matchesCollection.updateOne({_id: new ObjectId(req.params.matchId)}, { $set: match });
+    res.json(match);
   });
 
   router.delete('/:matchId', async function(req, res, next) {

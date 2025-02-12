@@ -1,11 +1,10 @@
 function score(id, player) {
   return async () => {
-    alert(player);
     const response = await fetch(`http://localhost:3000/matches/${id}/scores/${player}`, {
       method: 'PATCH'
     });
-    const score = await response.json();
-    document.getElementById('score').innerHTML = score.result;
+    const match = await response.json();
+    document.getElementById('score').innerHTML = match.score.result;
   }
 }
 
@@ -26,7 +25,7 @@ async function loadMatch() {
     </div>
     <div class="match-score">
       <div><button id="scoring-player1">Score's player 1</button></div>
-      <div class="score" id="score">${match.score}</div>
+      <div class="score" id="score">${match.score.result}</div>
       <div><button id="scoring-player2">Score's player 2</button></div>
     </div>
   </div>
