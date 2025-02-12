@@ -1,11 +1,14 @@
 import createError from 'http-errors';
 import express from 'express';
+import cors from 'cors';
 import logger from 'morgan';
 import { MongoClient } from 'mongodb';
 
 import { matchesRouter } from './routes/matches.js';
 
 const app = express();
+
+app.use(cors());
 
 const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url);
