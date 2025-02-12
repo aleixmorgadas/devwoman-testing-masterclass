@@ -1,6 +1,8 @@
 import express from 'express';
 const router = express.Router();
 
+import { ObjectId } from 'mongodb';
+
 
 export const matchesRouter = (db) => {
   const matchesCollection = db.collection('matches');
@@ -9,7 +11,6 @@ export const matchesRouter = (db) => {
     const matches = await matchesCollection.find({}).toArray();
     res.json(matches);
   });
-
   
   router.post('/', async function(req, res, next) {
     const match = {
@@ -18,6 +19,11 @@ export const matchesRouter = (db) => {
     }
     await matchesCollection.insertOne(match);
     res.json(match);
+  });
+
+  router.get('/:matchId', async function(req, res, next) {
+    const matches = await matchesCollection.findOne({_id: new ObjectId(req.params.matchId)});
+    res.json(matches);
   });
 
   router.delete('/:matchId', async function(req, res, next) {
