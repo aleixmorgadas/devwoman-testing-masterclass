@@ -5,14 +5,14 @@
 **backend**
 
 ```bash
-mv backend
+cd backend
 npm install
 ```
 
 **frontend**
 
 ```bash
-mv frontend
+cd frontend
 npm install
 ```
 
@@ -21,14 +21,14 @@ npm install
 **E2E**
 
 ```bash
-mv frontend 
+cd frontend 
 npx playwright test --ui
 ```
 
 **Unit**
 
 ```bash
-mv backend
+cd backend
 npm test
 ```
 
