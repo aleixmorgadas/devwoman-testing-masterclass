@@ -25,6 +25,8 @@ cd frontend
 npx playwright test --ui
 ```
 
+[E2E example](./frontend/e2e/tennis.spec.ts)
+
 **Unit**
 
 ```bash
@@ -32,11 +34,17 @@ cd backend
 npm test
 ```
 
+[Unit example](./backend/tests/match.test.js)
+
 **Integration**
 
 Import the postman collection that you can find at `backend` folder named `DevWomen Testing masterclass.postman_collection.json`.
 
 Use the following link to know how to import the collection. https://learning.postman.com/docs/designing-and-developing-your-api/importing-an-api/
+
+Test example:
+
+![Postman test example](.github/assets/postman-test-example.png)
 
 Run the test as:
 
