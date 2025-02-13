@@ -41,3 +41,7 @@ Use the following link to know how to import the collection. https://learning.po
 Run the test as:
 
 ![Postman run tests](.github/assets/postman-run-tests.png)
+
+## See Continuous Integration
+
+You can see the Continuous Integration pipelines at [Github Actions tab](https://github.com/aleixmorgadas/devwoman-testing-masterclass/actions)
