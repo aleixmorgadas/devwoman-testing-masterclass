@@ -78,12 +78,11 @@ export default defineConfig({
       url: "http://127.0.0.1:5173",
       reuseExistingServer: !process.env.CI,
     },
-
     {
       command: "npm run start",
-      url: "http://127.0.0.1:3000",
       reuseExistingServer: !process.env.CI,
-      cwd: '../backend'
+      cwd: '../backend/',
+      timeout: 5000
     },
   ],
 });
