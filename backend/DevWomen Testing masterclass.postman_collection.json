@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "825059fa-d7b6-4fac-bd2f-65a71038f105",
+		"name": "DevWomen Testing masterclass",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28966279"
+	},
+	"item": [
+		{
+			"name": "API",
+			"item": [
+				{
+					"name": "Get all matches",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/matches",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"matches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create match",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Returns the match created with ID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.player1).to.eql(\"Venus Williams\");\r",
+									"    pm.expect(jsonData.player2).to.eql(\"Serena Williams\");\r",
+									"    pm.expect(jsonData._id).to.not.be.undefined;\r",
+									"\r",
+									"\r",
+									"    pm.collectionVariables.set(\"matchId\", jsonData._id);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"player1\": \"Venus Williams\",\r\n    \"player2\": \"Serena Williams\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/matches",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"matches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete match",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/matches/{{matchId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"matches",
+								"{{matchId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "matchId",
+			"value": ""
+		}
+	]
+}
